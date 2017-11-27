@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ys.app.pet.pad2">
+
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 声明widget对应的AppWidgetProvider -->
+        <receiver
+            android:name=".MyWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <!-- 对应MyWidgetProvider中的静态变量ACTION_UPDATE_ALL -->
+                <action android:name="ys.app.pet.widget_UPDATE_ALL" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_appwidget_home" />
+        </receiver>
+
+        <service android:name=".MyWidgetService">
+            <intent-filter>
+
+                <!-- 对应MyWidgetProvider中的静态变量MY_ERVICE_INTENT -->
+                <action android:name="ys.app.pet.widget_APP_WIDGET_SERVICE" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".Activity_One" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity_Two"></activity>
+    </application>
+
+</manifest>
